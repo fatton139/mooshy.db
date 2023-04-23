@@ -97,6 +97,8 @@ const run = async () => {
     tableEntriesObj[table] = entries;
   });
 
+  console.info("Writing output...", tableEntriesObj);
+
   await fs.writeFile(
     path.join(process.cwd(), DB_META_OUT_FILENAME),
     JSON.stringify(tableEntriesObj)
