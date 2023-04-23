@@ -19,6 +19,7 @@ type TableEntries = {
 const TABLE_DIR_NAME = "tables";
 const ENTRY_META_FILENAME = "meta.json";
 const MOOSHY_DB = "mooshy.db";
+const DB_META_OUT_FILENAME = "db-meta.json";
 
 const run = async () => {
   const tableDir = path.join(process.cwd(), TABLE_DIR_NAME);
@@ -97,7 +98,7 @@ const run = async () => {
   });
 
   await fs.writeFile(
-    path.join(process.cwd(), "db-meta.json"),
+    path.join(process.cwd(), DB_META_OUT_FILENAME),
     JSON.stringify(tableEntriesObj)
   );
 };
