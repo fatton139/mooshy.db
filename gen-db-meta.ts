@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import url from "node:url";
+import urlJoin from "url-join";
 
 type EntryMetadata = {
   description?: string;
@@ -48,7 +48,7 @@ const run = async () => {
           }
 
           const { default: meta }: { default: EntryMetadata } = await import(
-            path.join(entryPath, metaFile),
+            path.join("file://", entryPath, metaFile),
             {
               assert: {
                 type: "json",
@@ -62,16 +62,8 @@ const run = async () => {
 
           resolve(
             otherFiles.map((filename) => {
-              const absPathAsUrl = url.pathToFileURL(
-                path.join(TABLE_DIR_NAME, tableName, entryName, filename)
-              ).href;
-
-              const relativeUrl = absPathAsUrl.substring(
-                absPathAsUrl.indexOf(MOOSHY_DB) + MOOSHY_DB.length + 1
-              );
-
               return {
-                url: relativeUrl,
+                url: urlJoin(TABLE_DIR_NAME, tableName, entryName, filename),
                 name: entryName,
                 meta,
               };

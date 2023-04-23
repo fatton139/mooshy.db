@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "I love mooshy",
   "homepage": "https://fatton139.github.com/mooshy.db",
+  "type": "module",
   "scripts": {
-    "gen-db-meta": "ts-node gen-db-meta.ts",
+    "gen-db-meta": "ts-node --esm gen-db-meta.ts",
     "format": "prettier --write ."
   },
   "keywords": [],
@@ -13,7 +14,8 @@
   "devDependencies": {
     "prettier": "^2.8.8",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "url-join": "^5.0.0"
   },
   "dependencies": {
     "@types/node": "^18.16.0"
