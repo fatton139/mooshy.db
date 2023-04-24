@@ -42,19 +42,12 @@ const run = async () => {
           );
 
           if (metaFile === undefined) {
-            throw new Error(`${ENTRY_META_FILENAME} is not undefined.`, {
-              cause: entryFilenames,
-            });
+            console.warn(ENTRY_META_FILENAME, "is not defined.");
           }
 
-          const { default: meta }: { default: EntryMetadata } = await import(
-            path.join("file://", entryPath, metaFile),
-            {
-              assert: {
-                type: "json",
-              },
-            }
-          );
+          const meta = metaFile
+            ? await getMeta(path.join("file://", entryPath, metaFile))
+            : {};
 
           const otherFiles = entryFilenames.filter(
             (name) => name !== ENTRY_META_FILENAME
