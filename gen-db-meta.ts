@@ -61,15 +61,31 @@ const run = async () => {
             (name) => name !== ENTRY_META_FILENAME
           );
 
-          resolve(
-            otherFiles.map((filename) => {
-              return {
+          const unresolvedFiles = otherFiles.map((filename) => {
+            return new Promise<any>(async (resolve) => {
+              const stat = await fs.stat(
+                path.join(
+                  process.cwd(),
+                  TABLE_DIR_NAME,
+                  tableName,
+                  entryName,
+                  filename
+                )
+              );
+
+              resolve({
                 url: urlJoin(TABLE_DIR_NAME, tableName, entryName, filename),
                 name: entryName,
-                meta,
-              };
-            })
-          );
+                meta: {
+                  ...meta,
+                  createdAt: stat.birthtime.toISOString(),
+                  size: stat.size,
+                },
+              });
+            });
+          });
+
+          resolve(await Promise.all(unresolvedFiles));
         });
       });
 
