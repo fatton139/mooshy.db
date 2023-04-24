@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import urlJoin from "url-join";
-import { ENTRY_META_FILENAME, TABLE_DIR_NAME } from "./consts";
+import { ENTRY_META_FILENAME, TABLE_DIR_NAME } from "./consts.ts";
 
 type EntryMetadata = {
   description?: string;

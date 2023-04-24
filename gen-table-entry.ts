@@ -1,6 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-import { ENTRY_META_FILENAME, TABLE_DIR_NAME } from "./consts";
+import { ENTRY_META_FILENAME, TABLE_DIR_NAME } from "./consts.ts";
 
 const run = async () => {
   const tableName = process.argv[2];
