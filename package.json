@@ -2,10 +2,11 @@
   "name": "mooshy.db",
   "version": "1.0.0",
   "description": "I love mooshy",
-  "homepage": "https://fatton139.github.com/mooshy.db",
+  "homepage": "https://fatton139.github.io/mooshy.db",
   "type": "module",
   "scripts": {
     "gen-db-meta": "ts-node --esm gen-db-meta.ts",
+    "gen-table-entry": "ts-node --esm gen-table-entry.ts",
     "format": "prettier --write ."
   },
   "keywords": [],
