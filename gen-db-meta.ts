@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import urlJoin from "url-join";
+import { ENTRY_META_FILENAME, TABLE_DIR_NAME } from "./consts";
 
 type EntryMetadata = {
   description?: string;
@@ -16,10 +17,17 @@ type TableEntries = {
   entries: Array<Entry>;
 };
 
-const TABLE_DIR_NAME = "tables";
-const ENTRY_META_FILENAME = "meta.json";
-const MOOSHY_DB = "mooshy.db";
 const DB_META_OUT_FILENAME = "db-meta.json";
+
+const getMeta = async (path: string) => {
+  const { default: meta }: { default: EntryMetadata } = await import(path, {
+    assert: {
+      type: "json",
+    },
+  });
+
+  return meta;
+};
 
 const run = async () => {
   const tableDir = path.join(process.cwd(), TABLE_DIR_NAME);
