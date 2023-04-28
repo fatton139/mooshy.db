@@ -16,7 +16,12 @@ const run = async () => {
   await fs.mkdir(entryPath, { recursive: true });
   await fs.writeFile(
     path.join(entryPath, ENTRY_META_FILENAME),
-    JSON.stringify({})
+    JSON.stringify({
+      createdAt: new Date().toISOString(),
+      title: "Untitled",
+      description: null,
+      tags: [],
+    })
   );
 };
 

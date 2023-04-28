@@ -78,7 +78,6 @@ const run = async () => {
                 name: entryName,
                 meta: {
                   ...meta,
-                  createdAt: stat.birthtime.toISOString(),
                   size: stat.size,
                 },
               });
