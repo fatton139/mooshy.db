@@ -29,6 +29,12 @@ const getMeta = async (path: string) => {
   return meta;
 };
 
+const dirExists = async (path: string) =>
+  await fs
+    .access(path)
+    .then(() => true)
+    .catch(() => false);
+
 const run = async () => {
   const tableDir = path.join(process.cwd(), TABLE_DIR_NAME);
   const tables = await fs.readdir(tableDir);
@@ -107,8 +113,14 @@ const run = async () => {
 
   console.info("Writing output...", tableEntriesObj);
 
+  const distDir = path.join(process.cwd(), "dist");
+
+  if (!(await dirExists(distDir))) {
+    await fs.mkdir(path.join(process.cwd(), "dist"));
+  }
+
   await fs.writeFile(
-    path.join(process.cwd(), DB_META_OUT_FILENAME),
+    path.join(process.cwd(), "dist", DB_META_OUT_FILENAME),
     JSON.stringify(tableEntriesObj)
   );
 };
