@@ -20,20 +20,15 @@ jobs:
       - name: Setup pages
         uses: actions/configure-pages@v1
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7
-
       - name: Setup node
         uses: actions/setup-node@v3
         with:
-          cache: "pnpm"
+          cache: "yarn"
 
       - name: Build
         run: |
-          pnpm install
-          pnpm run gen-db-meta
+          yarn install
+          yarn run gen-db-meta
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
